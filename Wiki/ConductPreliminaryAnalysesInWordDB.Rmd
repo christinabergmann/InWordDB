@@ -1,0 +1,44 @@
+---
+title: "Conduct preliminary analyses"
+author: "Christina Bergmann & Alejandrina Cristia"
+date: "June 2, 2015"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+## Step 1: Load necessary packages
+
+We use two libraries to conduct our meta-analyses: _meta_ and _metafor_. Make sure both are installed and load them with the `library` call in *R*.
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+library(meta)
+library(metafor)
+
+#Read in raw datafile
+library(RCurl)
+linkdb = "https://raw.githubusercontent.com/christinabergmann/InWordDB/master/InWordDBnoOutnoRM_ESg.csv"
+db.noOutnoRM <- getURL(linkdb)
+db.noOutnoRM <- read.csv(textConnection(db.noOutnoRM))
+```
+
+
+## Step 2: General random effects model
+
+
+This is the first step in a meta-analysis, calculating the general random effects model with no moderators while trimming out the outliers and taking a single effect size per infant group (no repeated measures).
+
+```{r, warning=FALSE, tidy=TRUE}
+grlmodel <-rma(ESg, sei=ESg.SE, data=db.noOutnoRM, weighted=TRUE)
+summary(grlmodel)
+```
+
+The estimate significantly above zero, and in the .2 region, a small but significant effect according to Cohen's (1988) criteria. Furtermore, heterogenity is significant, green light to look at moderators in targeted analyses. 
+
+
+## Step 3: Inspect funnel plot for asymmetries
+
+```{r}
+funnel(grlmodel,xlab="Effect size Hedges' g",pch = 20)
+```
+
