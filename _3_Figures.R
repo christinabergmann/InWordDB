@@ -75,7 +75,7 @@ dev.off()
 pdf("Age_EffectSize_Weighted.pdf",width=8,height=8)
 par(mar=c(4,4,2,1.5))
 p <- ggplot(db.noOutnoRM, aes(meanAge, ESg))
-print(p + geom_line(x=db.noOutnoRM$meanAge, y= 0, linetype="dotted")+ geom_point(size=db.noOutnoRM$ESg.W/13) + geom_smooth(method = "glm", aes(weight = db.noOutnoRM$ESg.W), colour = "black") + theme(text = element_text(size=20)) + xlab("Age in months") + ylab("Effect size Hedges' g"))
+print(p + geom_line(x=db.noOutnoRM$meanAge, y= 0, linetype="dotted")+ geom_point(size=db.noOutnoRM$ESg.W/13) + geom_smooth(method = "glm", aes(weight = db.noOutnoRM$ESg.W), colour = "black") + theme(text = element_text(size=20)) + xlab("Age in days") + ylab("Effect size Hedges' g"))
 
 dev.off()
 
@@ -85,7 +85,7 @@ dev.off()
 ##############################
 
 # Overall forest plot
-pdf("ForestPlot_InWordDB_perInfantGroup.pdf", height=38, width = 13)
+pdf("ForestPlot_InWordDB_perInfantGroup.pdf", height=42, width = 13)
 forest(metagen(ESg, ESg.SE, paste(Authors, JnlYear, InfantGroup, sep = ", "), 
                data = db.noOutnoRM))
 dev.off()
