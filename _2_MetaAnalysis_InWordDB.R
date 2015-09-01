@@ -113,3 +113,10 @@ summary(diffLg)
 rma(ESg, sei=ESg.SE, mods=~as.ordered(MultipleAgeGroupsYO),data= db.noOutnoRM, weighted=TRUE, subset=c(MultipleAgeGroups==1))->MultiAge
 summary(MultiAge)
 
+#Now test each subgroup for their effect size. 
+
+younger <- rma(ESg, sei=ESg.SE,data= db.noOutnoRM, weighted=TRUE, subset=c(MultipleAgeGroupsYO == 1))
+summary(younger)
+
+older <- rma(ESg, sei=ESg.SE,data= db.noOutnoRM, weighted=TRUE, subset=c(MultipleAgeGroupsYO == 2))
+summary(older)
