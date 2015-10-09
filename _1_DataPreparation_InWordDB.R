@@ -56,8 +56,8 @@ db$correlationFamNov.imputed<-impute(db$correlationFamNov,fun="random")
 ling_difficulty <-ifelse(db$Linguistic=="match",0,1) #This indicates whether the target word matches exactly in phonological form across familiarization and test 
 align_difficulty <- ifelse(db$EdgeAlignSimple==1,0,1) #This indicates whether the target word is always aligned with a sentence edge, in which case difficulty is 0
 align_difficulty[is.na(db$EdgeAlignSimple)] <- 1 #When edge alignment was not available assume that the target was NOT aligned with a sentence edge in all cases
-index_difficulty[db$Indexical=="not.manipulated"]<-1 #all studies where indexical properties were not controlled for get a 1
 index_difficulty <- ifelse(db$Indexical=="match",0,2) #in studies where indexical properties (pitch, voice, affect) are manipulated, the conditions having a precise match get zero, those with a mismatch get a 2
+index_difficulty[db$Indexical=="not.manipulated"]<-1 #all studies where indexical properties were not controlled for get a 1
 index_difficulty[is.na(db$Indexical)]<-1 #all studies where indexical properties were not controlled for get a 1
 
 #Calculate total difficulty score. 
